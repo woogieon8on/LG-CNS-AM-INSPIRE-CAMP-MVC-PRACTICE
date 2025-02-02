@@ -1,0 +1,26 @@
+<!-- movieWrite.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>영화 등록</title>
+    <link rel="stylesheet" type="text/css" href="/css/movie.css">
+</head>
+<body>
+<h1>영화 등록</h1>
+<form th:action="@{/movie/insertMovie.do}" method="post" enctype="multipart/form-data">
+    <label>영화 제목: <input type="text" name="title" required></label><br>
+    <label>감독: <input type="text" name="director" required></label><br>
+    <label>개봉일: <input type="date" name="releaseDate" required></label><br>
+    <label>장르: <input type="text" name="genre" required></label><br>
+    <label>평점: <input type="number" name="rating" step="0.1" min="0" max="10" required></label><br>
+    <label>설명:</label><br>
+    <label>
+        <textarea name="description" rows="4" cols="50" required></textarea>
+    </label><br>
+    <label>포스터: <input type="file" name="poster" multiple="multiple" required></label><br>
+    <button type="submit">등록</button>
+</form>
+<br>
+<a href="/movie/openMovieList.do">목록으로 돌아가기</a>
+</body>
+</html>

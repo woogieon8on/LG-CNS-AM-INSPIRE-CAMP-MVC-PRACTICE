@@ -1,0 +1,39 @@
+<!-- movieList.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>영화 목록</title>
+    <link rel="stylesheet" type="text/css" href="/css/movie.css">
+</head>
+<body>
+<h1>영화 목록</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>포스터</th>
+        <th>영화 제목</th>
+        <th>감독</th>
+        <th>개봉일</th>
+        <th>장르</th>
+        <th>평점</th>
+        <th>상세보기</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="movie : ${movieResponses}">
+        <td><img th:src="${movie.thumbnail}" alt="포스터" width="50" onerror="this.onerror=null; this.src='/images/default_poster.png';"></td>
+        <td th:text="${movie.title}"></td>
+        <td th:text="${movie.director}"></td>
+        <td th:text="${movie.releaseDate}"></td>
+        <td th:text="${movie.genre}"></td>
+        <td th:text="${movie.rating}"></td>
+        <td>
+            <a th:href="@{/movie/openMovieDetail.do(movieId=${movie.movieId})}">상세보기</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<a href="/movie/openMovieWrite.do">영화 추가</a>
+</body>
+</html>

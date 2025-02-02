@@ -1,0 +1,41 @@
+<!-- movieDetail.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>영화 상세 정보</title>
+    <link rel="stylesheet" type="text/css" href="/css/movie.css">
+</head>
+<body>
+<h1>영화 상세 정보</h1>
+<p><strong>제목:</strong> <span th:text="${movieDetailResponse.title}"></span></p>
+<p><strong>감독:</strong> <span th:text="${movieDetailResponse.director}"></span></p>
+<p><strong>개봉일:</strong> <span th:text="${movieDetailResponse.releaseDate}"></span></p>
+<p><strong>장르:</strong> <span th:text="${movieDetailResponse.genre}"></span></p>
+<p><strong>평점:</strong> <span th:text="${movieDetailResponse.rating}"></span></p>
+<p><strong>설명:</strong></p>
+<p th:text="${movieDetailResponse.description}"></p>
+<p><strong>포스터:</strong></p>
+<img th:src="@{${movieDetailResponse.thumbnail}}" alt="영화 포스터" width="200" onerror="this.onerror=null; this.src='/images/default_poster.png';">
+<br>
+<a th:href="@{/movie/downloadMoviePoster.do(movieId=${movieDetailResponse.movieId})}">포스터 다운로드</a>
+<br>
+<form th:action="@{/movie/updateMovie.do}" method="post">
+    <input type="hidden" name="movieId" th:value="${movieDetailResponse.movieId}">
+    <label>제목: <input type="text" name="title" th:value="${movieDetailResponse.title}" required></label><br>
+    <label>감독: <input type="text" name="director" th:value="${movieDetailResponse.director}" required></label><br>
+    <label>개봉일: <input type="date" name="releaseDate" th:value="${movieDetailResponse.releaseDate}" required></label><br>
+    <label>장르: <input type="text" name="genre" th:value="${movieDetailResponse.genre}" required></label><br>
+    <label>평점: <input type="number" name="rating" step="0.1" min="0" max="10" th:value="${movieDetailResponse.rating}" required></label><br>
+    <label>설명:</label><br>
+    <textarea name="description" rows="4" cols="50" required th:text="${movieDetailResponse.description}"></textarea><br>
+    <button type="submit">수정</button>
+</form>
+<br>
+<form th:action="@{/movie/deleteMovie.do}" method="post">
+    <input type="hidden" name="movieId" th:value="${movieDetailResponse.movieId}">
+    <button type="submit">삭제</button>
+</form>
+<br>
+<a href="/movie/openMovieList.do">목록으로 돌아가기</a>
+</body>
+</html>
